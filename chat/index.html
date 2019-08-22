@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <div id="app">
+        <div class="bg" style="position: fixed">
+            <video src="https://api.moelq.com/?lz=i5qch1g" autoplay loop style="width: 100%;height: 100%;">
+                <source  type="video/mp4">
+                <source type="video/ogg">
+                <source type="video/w3x">
+            </video>
+        </div>
+        <div id="chat-app"></div>
+    </div>
+</body>
+<style>
+    html,body,p,ul,li{
+        margin: 0;
+        padding: 0;
+    }
+    *{
+        -webkit-box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+        box-sizing: border-box;
+        word-wrap: break-word;
+    }
+    ul,li{
+        list-style: none;
+    }
+</style>
+<script type="text/javascript">
+    var Chats = {
+        Api:"https://chat.moelq.com/v1/put",
+        Title:"C-聊",
+        Id: "demo",
+        Name:"游客",
+        Avatar:"https://i.loli.net/2019/08/06/r7xN8Wq4jOZQ5i3.jpg",
+        HideAvatar:false,
+        Logo:"",
+    }
+</script>
+<script type="text/javascript" src="app.js"></script>
+</html>
