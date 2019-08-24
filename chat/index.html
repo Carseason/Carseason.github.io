@@ -19,15 +19,25 @@
     }
 </style>
 <script type="text/javascript">
-    var Chats = {
-        Api:"https://chat.moelq.com/v1/put",
+    var NewChats = {
+        Api:"",
         Title:"C聊",
         Id: "demo",
-        Name:"",
-        Avatar:"",
-        HideAvatar:false,
+        Author:{
+            Name:"",
+            Avatar:"",
+        },
+        Menus:[
+            { Name : "测试一" , Types : "default"},
+            { Name : "测试二" , Types : "default2"},
+            { Name : "测试三" , Types : "default3"},
+            { Name : "测试四" , Types : "default4"}
+        ],
         Logo:"",
+        HideAvatar:false,
     }
+    
 </script>
-<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="src/style.css">
+<script type="text/javascript" src="src/app.js"></script>
 </html>
