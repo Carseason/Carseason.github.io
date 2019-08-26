@@ -446,6 +446,9 @@ img.chat-logo:hover {
 }
 
 @media (max-width: 500px){
+    .chat-enable{
+        bottom:70px;
+    }
     img.chat-logo {
         max-width: 70px;
     }
@@ -464,5 +467,8 @@ img.chat-logo:hover {
         right: 0;
         max-width: 100%;
         z-index: 1;
+    }
+    ul.emojis-box a.emoji-list {
+        max-width: 10%;
     }
 }
