@@ -447,7 +447,7 @@ img.chat-logo:hover {
 
 @media (max-width: 500px){
     .chat-enable{
-        bottom:70px;
+        bottom:30px;
     }
     img.chat-logo {
         max-width: 70px;
