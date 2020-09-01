@@ -1,0 +1,1826 @@
+basePath: /v2
+definitions:
+  app.JSON:
+    properties:
+      message:
+        description: 接口信息
+        type: object
+      result:
+        description: 接口结果
+        type: object
+      success:
+        description: 接口码
+        type: integer
+      total:
+        type: integer
+    type: object
+  captcha.Captcha:
+    properties:
+      captchaBase64Image:
+        description: 用于生成验证码的base64
+        type: string
+      captchaCode:
+        description: 用户输入的验证码,提交至需要验证的接口
+        type: string
+      captchaId:
+        description: 验证 Code 的key,提交至需要验证的接口
+        type: string
+    type: object
+  category.Category:
+    $ref: '#/definitions/model.Category'
+  category.Query:
+    properties:
+      id:
+        description: 分类ID
+        type: integer
+      order:
+        description: 排序
+        type: string
+      page:
+        description: 分页
+        type: integer
+      tag:
+        description: 标签ID
+        type: integer
+    type: object
+  index.Index:
+    type: object
+  menus.Menus:
+    $ref: '#/definitions/model.Menus'
+  model.Analytics:
+    properties:
+      analyticsZone:
+        description: 动态数量
+        type: integer
+      comments:
+        description: 评论数量
+        type: integer
+      fans:
+        description: 粉丝数量
+        type: integer
+      followers:
+        description: 关注数量
+        type: integer
+      notice:
+        description: 提醒数量
+        type: integer
+      posts:
+        description: 文章数量
+        type: integer
+    type: object
+  model.Category:
+    properties:
+      cid:
+        description: 分类ID
+        type: integer
+      name:
+        description: 分类名称
+        type: string
+    type: object
+  model.Menus:
+    properties:
+      category:
+        description: 分类id
+        type: integer
+      child:
+        description: 子菜单
+        items:
+          $ref: '#/definitions/model.menu'
+        type: array
+      icon:
+        description: 图标
+        type: string
+      link:
+        description: 链接
+        type: string
+      name:
+        description: 名称
+        type: string
+    type: object
+  model.Posts:
+    properties:
+      author:
+        $ref: '#/definitions/model.User'
+        type: object
+      authorId:
+        type: integer
+      category:
+        items:
+          $ref: '#/definitions/model.Category'
+        type: array
+      content:
+        type: string
+      createdAt:
+        description: 创建日期
+        type: string
+      deletedAt:
+        type: string
+      pid:
+        type: integer
+      status:
+        type: string
+      tag:
+        items:
+          $ref: '#/definitions/model.Tag'
+        type: array
+      thumbnail:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        description: 更新日期
+        type: string
+      uuid:
+        type: string
+      views:
+        type: integer
+    type: object
+  model.Tag:
+    properties:
+      name:
+        type: string
+      tid:
+        type: integer
+    type: object
+  model.User:
+    properties:
+      analytics:
+        $ref: '#/definitions/model.Analytics'
+        description: 用户的信息统计
+        type: object
+      avatar:
+        description: 用户头像
+        type: string
+      birthday:
+        description: 用户的生日
+        type: string
+      description:
+        description: 用户签名
+        type: string
+      email:
+        description: 用户的邮箱
+        type: string
+      group:
+        description: 用户组
+        type: string
+      nickname:
+        description: 用户名称
+        type: string
+      phone:
+        description: 用户的手机号
+        type: string
+      sex:
+        description: 用户的性别
+        type: string
+      token:
+        description: 由于验证用户是否登录的Token
+        type: string
+      uid:
+        description: 用户的ID
+        type: integer
+      uuid:
+        description: 用户的UUID
+        type: string
+      wxid:
+        description: 用户的微信ID
+        type: string
+    type: object
+  model.menu:
+    properties:
+      category:
+        description: 分类id
+        type: integer
+      icon:
+        description: 图标
+        type: string
+      link:
+        description: 链接
+        type: string
+      name:
+        description: 名称
+        type: string
+    type: object
+  posts.Fav:
+    properties:
+      id:
+        description: 文章ID
+        type: integer
+    type: object
+  posts.Posts:
+    properties:
+      author:
+        $ref: '#/definitions/model.User'
+        type: object
+      authorId:
+        type: integer
+      category:
+        items:
+          $ref: '#/definitions/model.Category'
+        type: array
+      content:
+        type: string
+      createdAt:
+        description: 创建日期
+        type: string
+      deletedAt:
+        type: string
+      pid:
+        type: integer
+      status:
+        type: string
+      tag:
+        items:
+          $ref: '#/definitions/model.Tag'
+        type: array
+      thumbnail:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+      updatedAt:
+        description: 更新日期
+        type: string
+      uuid:
+        type: string
+      views:
+        type: integer
+    type: object
+  posts.Report:
+    properties:
+      content:
+        description: 要举报内容
+        type: string
+      id:
+        description: 目标用户id
+        type: integer
+    type: object
+  posts.Subs:
+    properties:
+      id:
+        description: 文章ID
+        type: integer
+    type: object
+  sign.Findpassword:
+    properties:
+      captcha:
+        $ref: '#/definitions/captcha.Captcha'
+        description: 验证码
+        type: object
+      login:
+        description: 用户账号,如手机 邮箱
+        type: string
+    type: object
+  sign.Forgetpassword:
+    properties:
+      captcha:
+        $ref: '#/definitions/captcha.Captcha'
+        description: 验证码
+        type: object
+      login:
+        description: 用户账号,如手机 邮箱
+        type: string
+      token:
+        description: 发送至用户邮箱或手机的验证码
+        type: string
+    type: object
+  sign.Login:
+    properties:
+      captcha:
+        $ref: '#/definitions/captcha.Captcha'
+        description: 验证码
+        type: object
+      login:
+        description: 用户登录的账号,如手机 邮箱
+        type: string
+      password:
+        description: 用户登录的密码
+        type: string
+    type: object
+  sign.Register:
+    properties:
+      captcha:
+        $ref: '#/definitions/captcha.Captcha'
+        description: 验证码
+        type: object
+      email:
+        description: 用户的邮箱
+        type: string
+      nickname:
+        description: 用户名称
+        type: string
+      password:
+        description: 用户密码
+        type: string
+      phone:
+        description: 用户的手机
+        type: string
+    type: object
+  tag.Tags:
+    properties:
+      categoryId:
+        description: 分类ID
+        type: integer
+      postsId:
+        description: 文章ID
+        type: integer
+      tags:
+        description: 所有标签
+        items:
+          $ref: '#/definitions/model.Tag'
+        type: array
+    type: object
+  user.Avatar:
+    properties:
+      file:
+        description: 用户上传的头像
+        type: string
+    type: object
+  user.Comments:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Dynamic:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Fans:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Fav:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Followers:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Info:
+    properties:
+      analytics:
+        $ref: '#/definitions/model.Analytics'
+        description: 用户的信息统计
+        type: object
+      avatar:
+        description: 用户头像
+        type: string
+      birthday:
+        description: 用户的生日
+        type: string
+      description:
+        description: 用户签名
+        type: string
+      email:
+        description: 用户的邮箱
+        type: string
+      group:
+        description: 用户组
+        type: string
+      nickname:
+        description: 用户名称
+        type: string
+      phone:
+        description: 用户的手机号
+        type: string
+      sex:
+        description: 用户的性别
+        type: string
+      token:
+        description: 由于验证用户是否登录的Token
+        type: string
+      uid:
+        description: 用户的ID
+        type: integer
+      uuid:
+        description: 用户的UUID
+        type: string
+      wxid:
+        description: 用户的微信ID
+        type: string
+    type: object
+  user.Msg:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+      type:
+        description: 消息类型 all | reply | at | love | system | whisper
+        type: string
+    type: object
+  user.Password:
+    properties:
+      password:
+        description: 用户的新密码
+        type: string
+      token:
+        description: 用户验证更改密码的token
+        type: string
+    type: object
+  user.Posts:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+      status:
+        description: 投稿的状态
+        type: string
+    type: object
+  user.Star:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Subs:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  user.Update:
+    properties:
+      birthday:
+        description: 用户的生日
+        type: string
+      description:
+        description: 用户签名
+        type: string
+      sex:
+        description: 用户的性别
+        type: string
+    type: object
+  users.Dynamic:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  users.Fans:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  users.Followers:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+    type: object
+  users.Info:
+    properties:
+      analytics:
+        $ref: '#/definitions/model.Analytics'
+        description: 用户的信息统计
+        type: object
+      avatar:
+        description: 用户头像
+        type: string
+      birthday:
+        description: 用户的生日
+        type: string
+      description:
+        description: 用户签名
+        type: string
+      email:
+        description: 用户的邮箱
+        type: string
+      group:
+        description: 用户组
+        type: string
+      nickname:
+        description: 用户名称
+        type: string
+      phone:
+        description: 用户的手机号
+        type: string
+      sex:
+        description: 用户的性别
+        type: string
+      token:
+        description: 由于验证用户是否登录的Token
+        type: string
+      uid:
+        description: 用户的ID
+        type: integer
+      uuid:
+        description: 用户的UUID
+        type: string
+      wxid:
+        description: 用户的微信ID
+        type: string
+    type: object
+  users.Pm:
+    properties:
+      content:
+        description: 要发送内容
+        type: string
+      id:
+        description: 目标用户id
+        type: integer
+    type: object
+  users.Posts:
+    properties:
+      offset:
+        description: 偏移页数
+        type: integer
+      status:
+        description: 投稿的状态
+        type: string
+    type: object
+  users.Report:
+    properties:
+      content:
+        description: 要举报内容
+        type: string
+      id:
+        description: 目标用户id
+        type: integer
+    type: object
+info:
+  contact:
+    name: API Support
+  description: 这是ONE的API
+  license: {}
+  title: one API
+  version: "1.0"
+paths:
+  /rest/sign/v1/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/sign.Login'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - ApiKeyAuth: []
+      summary: 登录
+      tags:
+      - 登录注册
+  /rest/v1/captcha:
+    get:
+      consumes:
+      - application/json
+      description: 用户获取验证码
+      parameters:
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/captcha.Captcha'
+      summary: 验证码
+      tags:
+      - 验证码
+  /rest/v1/category/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 分类的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/category.Category'
+      summary: 分类查询
+      tags:
+      - 分类
+    post:
+      consumes:
+      - application/json
+      description: |
+        用于查询该分类的文章
+      parameters:
+      - description: 分类的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/category.Query'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Posts'
+      summary: 文章查询
+      tags:
+      - 分类
+  /rest/v1/index/{type}:
+    get:
+      consumes:
+      - application/json
+      description: |
+        网站的首页模块
+      parameters:
+      - description: '模块类型, web | app '
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/index.Index'
+            type: array
+      summary: 首页模块
+      tags:
+      - 首页
+  /rest/v1/menus/{type}:
+    get:
+      consumes:
+      - application/json
+      description: |
+        网站公开的导航菜单
+      parameters:
+      - description: '导航菜单类型, web | app '
+        in: path
+        name: type
+        required: true
+        type: string
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/menus.Menus'
+            type: array
+      summary: 导航菜单
+      tags:
+      - 菜单
+  /rest/v1/posts/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 文章的ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/posts.Posts'
+      summary: 文章查询
+      tags:
+      - 文章
+  /rest/v1/posts/fav/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 当前用户收藏该文章
+      parameters:
+      - description: 文章的ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/posts.Fav'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/posts.Fav'
+      summary: 收藏文章
+      tags:
+      - 文章
+  /rest/v1/posts/report/{id}:
+    post:
+      consumes:
+      - application/json
+      description: |
+        当前用户举报该文章
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/posts.Report'
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      summary: 举报文章
+      tags:
+      - 文章
+  /rest/v1/posts/subs/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 当前用户订阅该文章
+      parameters:
+      - description: 文章的ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/posts.Subs'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/posts.Subs'
+      summary: 订阅文章
+      tags:
+      - 文章
+  /rest/v1/sign/findpassword:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/sign.Findpassword'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      security:
+      - ApiKeyAuth: []
+      summary: 发送用户认值信息
+      tags:
+      - 登录注册
+  /rest/v1/sign/forgetpassword:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/sign.Forgetpassword'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - ApiKeyAuth: []
+      summary: 重置密码
+      tags:
+      - 登录注册
+  /rest/v1/sign/outLogin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      security:
+      - ApiKeyAuth: []
+      summary: 注销用户登录
+      tags:
+      - 登录注册
+  /rest/v1/sign/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/sign.Register'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+      security:
+      - ApiKeyAuth: []
+      summary: 注册用户
+      tags:
+      - 登录注册
+  /rest/v1/tags/{id}:
+    post:
+      consumes:
+      - application/json
+      description: |
+        用于查询分类下的所有标签
+      parameters:
+      - description: 分类的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/tag.Tags'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/tag.Tags'
+            type: array
+      summary: 标签查询
+      tags:
+      - 标签
+  /rest/v1/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 用于上传文件
+      parameters:
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      - description: 要上传的文件
+        in: body
+        name: file
+        required: true
+        schema:
+          type: string
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: 返回上传文件保存至的链接
+          schema:
+            items:
+              type: string
+            type: array
+      summary: 上传文件
+      tags:
+      - 上传
+  /rest/v1/user/avatar:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 更新当前用户的头像
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Avatar'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/app.JSON'
+            type: array
+      summary: 上传头像
+      tags:
+      - 当前用户
+  /rest/v1/user/comments:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户的评论
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Comments'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户的评论
+      tags:
+      - 当前用户
+  /rest/v1/user/dynamic:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户的动态
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Dynamic'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Posts'
+            type: array
+      summary: 用户的动态
+      tags:
+      - 当前用户
+  /rest/v1/user/fans:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户的粉丝
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Fans'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户的粉丝
+      tags:
+      - 当前用户
+  /rest/v1/user/fav:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户收藏的文章
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Fav'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户收藏的文章
+      tags:
+      - 当前用户
+  /rest/v1/user/followers:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户的关注
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Followers'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户的关注
+      tags:
+      - 当前用户
+  /rest/v1/user/info:
+    get:
+      consumes:
+      - application/json
+      description: |
+        用于获取当前登录用户信息
+      parameters:
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.Info'
+      summary: 用户信息
+      tags:
+      - 当前用户
+    put:
+      consumes:
+      - application/json
+      description: |
+        用于更新当前用户的资料
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Update'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      summary: 更新用户资料
+      tags:
+      - 当前用户
+  /rest/v1/user/info/{id}:
+    get:
+      consumes:
+      - application/json
+      description: |
+        用于查询用户信息
+      parameters:
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/users.Info'
+      summary: 用户信息
+      tags:
+      - 用户
+  /rest/v1/user/msg:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户的消息
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Msg'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                type: string
+              type: array
+            type: array
+      summary: 用户的消息
+      tags:
+      - 当前用户
+  /rest/v1/user/password:
+    put:
+      consumes:
+      - application/json
+      description: 更新当前用户的密码
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Password'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/app.JSON'
+            type: array
+      summary: 更改用户密码
+      tags:
+      - 当前用户
+  /rest/v1/user/pm/{id}:
+    post:
+      consumes:
+      - application/json
+      description: |
+        向用户发送一份私信
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/users.Pm'
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      summary: 私信
+      tags:
+      - 用户
+  /rest/v1/user/posts:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户的投稿
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Posts'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Posts'
+            type: array
+      summary: 用户的投稿
+      tags:
+      - 当前用户
+  /rest/v1/user/report/{id}:
+    post:
+      consumes:
+      - application/json
+      description: |
+        举报该用户
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/users.Report'
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      summary: 举报
+      tags:
+      - 用户
+  /rest/v1/user/star:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户点赞的文章
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Star'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户点赞的文章
+      tags:
+      - 当前用户
+  /rest/v1/user/subs:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取当前登录用户订阅的文章
+      parameters:
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.Subs'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户的订阅文章
+      tags:
+      - 当前用户
+  /rest/v1/users/dynamic/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 用于获取用户的动态
+      parameters:
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/users.Dynamic'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Posts'
+            type: array
+      summary: 用户的动态
+      tags:
+      - 用户
+  /rest/v1/users/fans/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 用于查询用户的粉丝
+      parameters:
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/users.Fans'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户的粉丝
+      tags:
+      - 用户
+    put:
+      consumes:
+      - application/json
+      description: 用于关注用户
+      parameters:
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/app.JSON'
+      summary: 关注该用户
+      tags:
+      - 用户
+  /rest/v1/users/followers/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 用于查询用户的关注
+      parameters:
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/users.Followers'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+      summary: 用户的关注
+      tags:
+      - 用户
+  /rest/v1/users/posts/{id}:
+    post:
+      consumes:
+      - application/json
+      description: 用于查询用户的投稿
+      parameters:
+      - description: 用户的ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: 提交的参数
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/users.Posts'
+      - description: 用于验证请求合法性的签名
+        in: header
+        name: x-secret
+        required: true
+        type: string
+      - description: 用于验证登录的jwt授权
+        in: header
+        name: x-token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Posts'
+            type: array
+      summary: 用户的投稿
+      tags:
+      - 用户
+swagger: "2.0"

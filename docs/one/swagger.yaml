@@ -1,0 +1,2685 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "这是ONE的API",
+        "title": "one API",
+        "contact": {
+            "name": "API Support"
+        },
+        "license": {},
+        "version": "1.0"
+    },
+    "basePath": "/v2",
+    "paths": {
+        "/rest/sign/v1/login": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录注册"
+                ],
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sign.Login"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/captcha": {
+            "get": {
+                "description": "用户获取验证码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "验证码"
+                ],
+                "summary": "验证码",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/captcha.Captcha"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/category/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "分类"
+                ],
+                "summary": "分类查询",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分类的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/category.Category"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "用于查询该分类的文章\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "分类"
+                ],
+                "summary": "文章查询",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分类的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/category.Query"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Posts"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/index/{type}": {
+            "get": {
+                "description": "网站的首页模块\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "首页"
+                ],
+                "summary": "首页模块",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "模块类型, web | app ",
+                        "name": "type",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/index.Index"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/menus/{type}": {
+            "get": {
+                "description": "网站公开的导航菜单\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "菜单"
+                ],
+                "summary": "导航菜单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "导航菜单类型, web | app ",
+                        "name": "type",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/menus.Menus"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/posts/fav/{id}": {
+            "post": {
+                "description": "当前用户收藏该文章",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "收藏文章",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "文章的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/posts.Fav"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/posts.Fav"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/posts/report/{id}": {
+            "post": {
+                "description": "当前用户举报该文章\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "举报文章",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/posts.Report"
+                        }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/posts/subs/{id}": {
+            "post": {
+                "description": "当前用户订阅该文章",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "订阅文章",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "文章的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/posts.Subs"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/posts.Subs"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/posts/{id}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "文章"
+                ],
+                "summary": "文章查询",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "文章的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/posts.Posts"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/sign/findpassword": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录注册"
+                ],
+                "summary": "发送用户认值信息",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sign.Findpassword"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/sign/forgetpassword": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录注册"
+                ],
+                "summary": "重置密码",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sign.Forgetpassword"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/sign/outLogin": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录注册"
+                ],
+                "summary": "注销用户登录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/sign/register": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录注册"
+                ],
+                "summary": "注册用户",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/sign.Register"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.User"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/tags/{id}": {
+            "post": {
+                "description": "用于查询分类下的所有标签\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "标签"
+                ],
+                "summary": "标签查询",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "分类的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/tag.Tags"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/tag.Tags"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/upload": {
+            "post": {
+                "description": "用于上传文件",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "上传"
+                ],
+                "summary": "上传文件",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "要上传的文件",
+                        "name": "file",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回上传文件保存至的链接",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/avatar": {
+            "post": {
+                "description": "更新当前用户的头像",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "上传头像",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Avatar"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app.JSON"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/comments": {
+            "post": {
+                "description": "用于获取当前登录用户的评论",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的评论",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Comments"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/dynamic": {
+            "post": {
+                "description": "用于获取当前登录用户的动态",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的动态",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Dynamic"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Posts"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/fans": {
+            "post": {
+                "description": "用于获取当前登录用户的粉丝",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的粉丝",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Fans"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/fav": {
+            "post": {
+                "description": "用于获取当前登录用户收藏的文章",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户收藏的文章",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Fav"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/followers": {
+            "post": {
+                "description": "用于获取当前登录用户的关注",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的关注",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Followers"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/info": {
+            "get": {
+                "description": "用于获取当前登录用户信息\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.Info"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "用于更新当前用户的资料\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "更新用户资料",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Update"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/info/{id}": {
+            "get": {
+                "description": "用于查询用户信息\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户信息",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/users.Info"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/msg": {
+            "post": {
+                "description": "用于获取当前登录用户的消息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的消息",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Msg"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/password": {
+            "put": {
+                "description": "更新当前用户的密码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "更改用户密码",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Password"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app.JSON"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/pm/{id}": {
+            "post": {
+                "description": "向用户发送一份私信\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "私信",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.Pm"
+                        }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/posts": {
+            "post": {
+                "description": "用于获取当前登录用户的投稿",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的投稿",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Posts"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Posts"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/report/{id}": {
+            "post": {
+                "description": "举报该用户\n",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "举报",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.Report"
+                        }
+                    },
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/star": {
+            "post": {
+                "description": "用于获取当前登录用户点赞的文章",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户点赞的文章",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Star"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/user/subs": {
+            "post": {
+                "description": "用于获取当前登录用户订阅的文章",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "当前用户"
+                ],
+                "summary": "用户的订阅文章",
+                "parameters": [
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.Subs"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/users/dynamic/{id}": {
+            "post": {
+                "description": "用于获取用户的动态",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户的动态",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.Dynamic"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Posts"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/users/fans/{id}": {
+            "put": {
+                "description": "用于关注用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "关注该用户",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/app.JSON"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "用于查询用户的粉丝",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户的粉丝",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.Fans"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/users/followers/{id}": {
+            "post": {
+                "description": "用于查询用户的关注",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户的关注",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.Followers"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rest/v1/users/posts/{id}": {
+            "post": {
+                "description": "用于查询用户的投稿",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户的投稿",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "用户的ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "提交的参数",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users.Posts"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证请求合法性的签名",
+                        "name": "x-secret",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用于验证登录的jwt授权",
+                        "name": "x-token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Posts"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "app.JSON": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "接口信息",
+                    "type": "object"
+                },
+                "result": {
+                    "description": "接口结果",
+                    "type": "object"
+                },
+                "success": {
+                    "description": "接口码",
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "captcha.Captcha": {
+            "type": "object",
+            "properties": {
+                "captchaBase64Image": {
+                    "description": "用于生成验证码的base64",
+                    "type": "string"
+                },
+                "captchaCode": {
+                    "description": "用户输入的验证码,提交至需要验证的接口",
+                    "type": "string"
+                },
+                "captchaId": {
+                    "description": "验证 Code 的key,提交至需要验证的接口",
+                    "type": "string"
+                }
+            }
+        },
+        "category.Category": {
+            "$ref": "#/definitions/model.Category"
+        },
+        "category.Query": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "分类ID",
+                    "type": "integer"
+                },
+                "order": {
+                    "description": "排序",
+                    "type": "string"
+                },
+                "page": {
+                    "description": "分页",
+                    "type": "integer"
+                },
+                "tag": {
+                    "description": "标签ID",
+                    "type": "integer"
+                }
+            }
+        },
+        "index.Index": {
+            "type": "object"
+        },
+        "menus.Menus": {
+            "$ref": "#/definitions/model.Menus"
+        },
+        "model.Analytics": {
+            "type": "object",
+            "properties": {
+                "analyticsZone": {
+                    "description": "动态数量",
+                    "type": "integer"
+                },
+                "comments": {
+                    "description": "评论数量",
+                    "type": "integer"
+                },
+                "fans": {
+                    "description": "粉丝数量",
+                    "type": "integer"
+                },
+                "followers": {
+                    "description": "关注数量",
+                    "type": "integer"
+                },
+                "notice": {
+                    "description": "提醒数量",
+                    "type": "integer"
+                },
+                "posts": {
+                    "description": "文章数量",
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Category": {
+            "type": "object",
+            "properties": {
+                "cid": {
+                    "description": "分类ID",
+                    "type": "integer"
+                },
+                "name": {
+                    "description": "分类名称",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Menus": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "description": "分类id",
+                    "type": "integer"
+                },
+                "child": {
+                    "description": "子菜单",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.menu"
+                    }
+                },
+                "icon": {
+                    "description": "图标",
+                    "type": "string"
+                },
+                "link": {
+                    "description": "链接",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "名称",
+                    "type": "string"
+                }
+            }
+        },
+        "model.Posts": {
+            "type": "object",
+            "properties": {
+                "author": {
+                    "type": "object",
+                    "$ref": "#/definitions/model.User"
+                },
+                "authorId": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Category"
+                    }
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "创建日期",
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "pid": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Tag"
+                    }
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "更新日期",
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "views": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.Tag": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "tid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.User": {
+            "type": "object",
+            "properties": {
+                "analytics": {
+                    "description": "用户的信息统计",
+                    "type": "object",
+                    "$ref": "#/definitions/model.Analytics"
+                },
+                "avatar": {
+                    "description": "用户头像",
+                    "type": "string"
+                },
+                "birthday": {
+                    "description": "用户的生日",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "用户签名",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "用户的邮箱",
+                    "type": "string"
+                },
+                "group": {
+                    "description": "用户组",
+                    "type": "string"
+                },
+                "nickname": {
+                    "description": "用户名称",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "用户的手机号",
+                    "type": "string"
+                },
+                "sex": {
+                    "description": "用户的性别",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "由于验证用户是否登录的Token",
+                    "type": "string"
+                },
+                "uid": {
+                    "description": "用户的ID",
+                    "type": "integer"
+                },
+                "uuid": {
+                    "description": "用户的UUID",
+                    "type": "string"
+                },
+                "wxid": {
+                    "description": "用户的微信ID",
+                    "type": "string"
+                }
+            }
+        },
+        "model.menu": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "description": "分类id",
+                    "type": "integer"
+                },
+                "icon": {
+                    "description": "图标",
+                    "type": "string"
+                },
+                "link": {
+                    "description": "链接",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "名称",
+                    "type": "string"
+                }
+            }
+        },
+        "posts.Fav": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "文章ID",
+                    "type": "integer"
+                }
+            }
+        },
+        "posts.Posts": {
+            "type": "object",
+            "properties": {
+                "author": {
+                    "type": "object",
+                    "$ref": "#/definitions/model.User"
+                },
+                "authorId": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Category"
+                    }
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "description": "创建日期",
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "pid": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Tag"
+                    }
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "更新日期",
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                },
+                "views": {
+                    "type": "integer"
+                }
+            }
+        },
+        "posts.Report": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "description": "要举报内容",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "目标用户id",
+                    "type": "integer"
+                }
+            }
+        },
+        "posts.Subs": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "文章ID",
+                    "type": "integer"
+                }
+            }
+        },
+        "sign.Findpassword": {
+            "type": "object",
+            "properties": {
+                "captcha": {
+                    "description": "验证码",
+                    "type": "object",
+                    "$ref": "#/definitions/captcha.Captcha"
+                },
+                "login": {
+                    "description": "用户账号,如手机 邮箱",
+                    "type": "string"
+                }
+            }
+        },
+        "sign.Forgetpassword": {
+            "type": "object",
+            "properties": {
+                "captcha": {
+                    "description": "验证码",
+                    "type": "object",
+                    "$ref": "#/definitions/captcha.Captcha"
+                },
+                "login": {
+                    "description": "用户账号,如手机 邮箱",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "发送至用户邮箱或手机的验证码",
+                    "type": "string"
+                }
+            }
+        },
+        "sign.Login": {
+            "type": "object",
+            "properties": {
+                "captcha": {
+                    "description": "验证码",
+                    "type": "object",
+                    "$ref": "#/definitions/captcha.Captcha"
+                },
+                "login": {
+                    "description": "用户登录的账号,如手机 邮箱",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "用户登录的密码",
+                    "type": "string"
+                }
+            }
+        },
+        "sign.Register": {
+            "type": "object",
+            "properties": {
+                "captcha": {
+                    "description": "验证码",
+                    "type": "object",
+                    "$ref": "#/definitions/captcha.Captcha"
+                },
+                "email": {
+                    "description": "用户的邮箱",
+                    "type": "string"
+                },
+                "nickname": {
+                    "description": "用户名称",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "用户密码",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "用户的手机",
+                    "type": "string"
+                }
+            }
+        },
+        "tag.Tags": {
+            "type": "object",
+            "properties": {
+                "categoryId": {
+                    "description": "分类ID",
+                    "type": "integer"
+                },
+                "postsId": {
+                    "description": "文章ID",
+                    "type": "integer"
+                },
+                "tags": {
+                    "description": "所有标签",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Tag"
+                    }
+                }
+            }
+        },
+        "user.Avatar": {
+            "type": "object",
+            "properties": {
+                "file": {
+                    "description": "用户上传的头像",
+                    "type": "string"
+                }
+            }
+        },
+        "user.Comments": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Dynamic": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Fans": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Fav": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Followers": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Info": {
+            "type": "object",
+            "properties": {
+                "analytics": {
+                    "description": "用户的信息统计",
+                    "type": "object",
+                    "$ref": "#/definitions/model.Analytics"
+                },
+                "avatar": {
+                    "description": "用户头像",
+                    "type": "string"
+                },
+                "birthday": {
+                    "description": "用户的生日",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "用户签名",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "用户的邮箱",
+                    "type": "string"
+                },
+                "group": {
+                    "description": "用户组",
+                    "type": "string"
+                },
+                "nickname": {
+                    "description": "用户名称",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "用户的手机号",
+                    "type": "string"
+                },
+                "sex": {
+                    "description": "用户的性别",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "由于验证用户是否登录的Token",
+                    "type": "string"
+                },
+                "uid": {
+                    "description": "用户的ID",
+                    "type": "integer"
+                },
+                "uuid": {
+                    "description": "用户的UUID",
+                    "type": "string"
+                },
+                "wxid": {
+                    "description": "用户的微信ID",
+                    "type": "string"
+                }
+            }
+        },
+        "user.Msg": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "消息类型 all | reply | at | love | system | whisper",
+                    "type": "string"
+                }
+            }
+        },
+        "user.Password": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "description": "用户的新密码",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "用户验证更改密码的token",
+                    "type": "string"
+                }
+            }
+        },
+        "user.Posts": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "投稿的状态",
+                    "type": "string"
+                }
+            }
+        },
+        "user.Star": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Subs": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "user.Update": {
+            "type": "object",
+            "properties": {
+                "birthday": {
+                    "description": "用户的生日",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "用户签名",
+                    "type": "string"
+                },
+                "sex": {
+                    "description": "用户的性别",
+                    "type": "string"
+                }
+            }
+        },
+        "users.Dynamic": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "users.Fans": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "users.Followers": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                }
+            }
+        },
+        "users.Info": {
+            "type": "object",
+            "properties": {
+                "analytics": {
+                    "description": "用户的信息统计",
+                    "type": "object",
+                    "$ref": "#/definitions/model.Analytics"
+                },
+                "avatar": {
+                    "description": "用户头像",
+                    "type": "string"
+                },
+                "birthday": {
+                    "description": "用户的生日",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "用户签名",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "用户的邮箱",
+                    "type": "string"
+                },
+                "group": {
+                    "description": "用户组",
+                    "type": "string"
+                },
+                "nickname": {
+                    "description": "用户名称",
+                    "type": "string"
+                },
+                "phone": {
+                    "description": "用户的手机号",
+                    "type": "string"
+                },
+                "sex": {
+                    "description": "用户的性别",
+                    "type": "string"
+                },
+                "token": {
+                    "description": "由于验证用户是否登录的Token",
+                    "type": "string"
+                },
+                "uid": {
+                    "description": "用户的ID",
+                    "type": "integer"
+                },
+                "uuid": {
+                    "description": "用户的UUID",
+                    "type": "string"
+                },
+                "wxid": {
+                    "description": "用户的微信ID",
+                    "type": "string"
+                }
+            }
+        },
+        "users.Pm": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "description": "要发送内容",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "目标用户id",
+                    "type": "integer"
+                }
+            }
+        },
+        "users.Posts": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "description": "偏移页数",
+                    "type": "integer"
+                },
+                "status": {
+                    "description": "投稿的状态",
+                    "type": "string"
+                }
+            }
+        },
+        "users.Report": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "description": "要举报内容",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "目标用户id",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
